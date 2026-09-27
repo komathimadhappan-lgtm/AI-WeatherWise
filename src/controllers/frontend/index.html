@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI WeatherWise</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🌤️ AI WeatherWise</h1>
+
+        <button onclick="logout()" class="logout-btn">
+            Logout
+        </button>
+
+        <p class="subtitle">
+            Smart Weather Monitoring & AI Recommendations
+        </p>
+
+
+        <!-- Weather Search -->
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="cityInput"
+                placeholder="Enter city name"
+            >
+
+            <button onclick="getWeather()">
+                Get Weather
+            </button>
+
+        </div>
+
+
+        <!-- Loading -->
+        <div id="loading" class="loading">
+            Loading weather...
+        </div>
+
+
+        <!-- Weather Card -->
+        <div id="weatherCard" class="weather-card">
+
+            <h2 id="cityName">
+                Chennai
+            </h2>
+
+            <div class="temperature">
+                <span id="temperature">--</span>°C
+            </div>
+
+            <p>
+                Condition:
+                <strong id="condition">--</strong>
+            </p>
+
+            <p>
+                Humidity:
+                <strong id="humidity">--</strong>%
+            </p>
+
+        </div>
+
+
+        <!-- AI Recommendation -->
+        <div class="ai-card">
+
+            <h2>🤖 AI Weather Recommendation</h2>
+
+            <p id="recommendation">
+                Search for a city to get an AI recommendation.
+            </p>
+
+        </div>
+
+
+        <!-- AI Weather Summary -->
+        <div class="ai-card">
+
+            <h2>🌤️ AI Weather Summary</h2>
+
+            <p id="weatherSummary">
+                Search for a city to get an AI weather summary.
+            </p>
+
+        </div>
+
+
+        <!-- AI Weather Risk Assessment -->
+        <div class="ai-card">
+
+            <h2>⚠️ AI Weather Risk Assessment</h2>
+
+            <p>
+                Risk Score:
+                <strong id="riskScore">--</strong>
+            </p>
+
+            <p>
+                Risk Level:
+                <strong id="riskLevel">--</strong>
+            </p>
+
+            <p>
+                AI Alert:
+                <strong id="riskAlert">
+                    Search for a city to assess weather risk.
+                </strong>
+            </p>
+
+        </div>
+
+
+        <!-- Saved Locations -->
+        <div class="weather-card">
+
+            <h2>📍 Saved Locations</h2>
+
+            <input
+                type="text"
+                id="locationInput"
+                placeholder="Enter location name"
+                style="width:100%; padding:15px; margin:10px 0; border-radius:10px; border:none;"
+            >
+
+            <button
+                onclick="saveLocation()"
+                style="width:100%; padding:15px; margin-top:10px; border:none; border-radius:10px; background:#00d9ff; font-weight:bold; cursor:pointer;"
+            >
+                Save Location
+            </button>
+
+            <p
+                id="locationMessage"
+                style="margin-top:15px;"
+            ></p>
+
+            <div
+                id="savedLocations"
+                style="margin-top:20px;"
+            >
+                Loading saved locations...
+            </div>
+
+        </div>
+
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error"></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+

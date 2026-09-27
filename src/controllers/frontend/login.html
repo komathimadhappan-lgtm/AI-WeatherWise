@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - AI WeatherWise</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🌤️ AI WeatherWise</h1>
+
+        <p class="subtitle">
+            Login to continue
+        </p>
+
+        <div class="weather-card">
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter email"
+                style="width:100%; padding:15px; margin:10px 0; border-radius:10px; border:none;"
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+                style="width:100%; padding:15px; margin:10px 0; border-radius:10px; border:none;"
+            >
+
+            <button
+                onclick="login()"
+                style="width:100%; padding:15px; margin-top:10px; border:none; border-radius:10px; background:#00d9ff; font-weight:bold; cursor:pointer;"
+            >
+                Login
+            </button>
+
+            <p id="message" style="margin-top:15px;"></p>
+
+            <p style="margin-top:20px;">
+                Don't have an account?
+                <a href="register.html">Register</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const API_BASE_URL = "http://localhost:5001";
+
+        async function login() {
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            const message =
+                document.getElementById("message");
+
+            if (!email || !password) {
+                message.textContent =
+                    "Please enter email and password.";
+                return;
+            }
+
+            try {
+
+                const response = await fetch(
+                    `${API_BASE_URL}/api/auth/login`,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email: email,
+                            password: password
+                        })
+                    }
+                );
+
+                const result = await response.json();
+
+                console.log("Login Response:", result);
+
+                if (!response.ok) {
+                    throw new Error(
+                        result.message || "Login failed"
+                    );
+                }
+
+                if (!result.data || !result.data.token) {
+                    throw new Error(
+                        "Token not received from server."
+                    );
+                }
+
+                localStorage.setItem(
+                    "token",
+                    result.data.token
+                );
+
+                message.textContent =
+                    "Login successful!";
+
+                window.location.href = "index.html";
+
+            } catch (error) {
+
+                console.error("Login Error:", error);
+
+                message.textContent =
+                    error.message;
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
