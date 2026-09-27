@@ -451,14 +451,11 @@ async function saveLocation() {
     const locationInput =
         document.getElementById("locationInput");
 
-
     const locationMessage =
         document.getElementById("locationMessage");
 
-
     const location =
         locationInput.value.trim();
-
 
     const token =
         localStorage.getItem("token");
@@ -494,8 +491,10 @@ async function saveLocation() {
                     "Authorization": `Bearer ${token}`
                 },
 
+                // FIXED: Backend requires city and country
                 body: JSON.stringify({
-                    location: location
+                    city: location,
+                    country: "India"
                 })
             }
         );
